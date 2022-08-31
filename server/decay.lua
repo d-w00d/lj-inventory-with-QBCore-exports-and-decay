@@ -190,7 +190,7 @@ QBCore.Functions.CreateCallback('inventory:server:ConvertQuality', function(sour
                     end
                 end
             end
-            SaveStashItems(stash, stashItems)
+            SaveStashItems(id, stashItems)
         end
     end
     SetInventory(src, inventory)
