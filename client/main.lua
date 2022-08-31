@@ -475,7 +475,7 @@ RegisterNetEvent('inventory:client:OpenInventory', function(PlayerAmmo, inventor
             other = data.other
             SendNUIMessage({
                 action = "open",
-                inventory = QBCore.Functions.GetPlayerData().items,
+                inventory = inventory,
                 slots = Config.MaxInventorySlots,
                 other = other,
                 maxweight = Config.MaxInventoryWeight,
