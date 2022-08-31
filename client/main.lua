@@ -488,13 +488,13 @@ RegisterNetEvent('inventory:client:OpenInventory', function(PlayerAmmo, inventor
 end)
 
 RegisterNetEvent('inventory:client:UpdatePlayerInventory', function(isError)
-    SendNUIMessage({
-        action = "update",
-        inventory = PlayerData.items,
-        maxweight = Config.MaxInventoryWeight,
-        slots = Config.MaxInventorySlots,
-        error = isError,
-    })
+    -- SendNUIMessage({
+    --     action = "update",
+    --     inventory = PlayerData.items,
+    --     maxweight = Config.MaxInventoryWeight,
+    --     slots = Config.MaxInventorySlots,
+    --     error = isError,
+    -- })
 end)
 
 RegisterNetEvent('inventory:client:CraftItems', function(itemName, itemCosts, amount, toSlot, points)

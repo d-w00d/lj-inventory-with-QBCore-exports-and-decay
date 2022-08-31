@@ -2781,83 +2781,93 @@ var requiredItemOpen = false;
             }
         }
 
-        $.each(data.inventory, function(i, item) {
-            if (item != null) {
-                totalWeight += item.weight * item.amount;
-                if (item.slot < 6) {
-                    $(".player-inventory")
-                        .find("[data-slot=" + item.slot + "]")
-                        .addClass("item-drag");
-                    $(".player-inventory")
-                        .find("[data-slot=" + item.slot + "]")
-                        .html(
-                            '<div class="item-slot-key"><p>' +
-                            item.slot +
-                            '</p></div><div class="item-slot-img"><img src="images/' +
-                            item.image +
-                            '" alt="' +
-                            item.name +
-                            '" /></div><div class="item-slot-amount"><p>' +
-                            item.amount +
-                            '</div><div class="item-slot-name"><p>' +
-                            " " +
-                            ((item.weight * item.amount) / 1000).toFixed(1) +
-                            '</p></div><div class="item-slot-label"><p>' +
-                            item.label +
-                            "</p></div>"
-                        );
-                    $(".player-inventory")
-                        .find("[data-slot=" + item.slot + "]")
-                        .data("item", item);
-                } else if (item.slot == 41) {
-                    $(".player-inventory")
-                        .find("[data-slot=" + item.slot + "]")
-                        .addClass("item-drag");
-                    $(".player-inventory")
-                        .find("[data-slot=" + item.slot + "]")
-                        .html(
-                            '<div class="item-slot-key"><p>6 <i class="fas fa-lock"></i></p></div><div class="item-slot-img"><img src="images/' +
-                            item.image +
-                            '" alt="' +
-                            item.name +
-                            '" /></div><div class="item-slot-amount"><p>' +
-                            item.amount +
-                            '</div><div class="item-slot-name"><p>' +
-                            " " +
-                            ((item.weight * item.amount) / 1000).toFixed(1) +
-                            '</p></div><div class="item-slot-label"><p>' +
-                            item.label +
-                            "</p></div>"
-                        );
-                    $(".player-inventory")
-                        .find("[data-slot=" + item.slot + "]")
-                        .data("item", item);
-                } else {
-                    $(".player-inventory")
-                        .find("[data-slot=" + item.slot + "]")
-                        .addClass("item-drag");
-                    $(".player-inventory")
-                        .find("[data-slot=" + item.slot + "]")
-                        .html(
-                            '<div class="item-slot-img"><img src="images/' +
-                            item.image +
-                            '" alt="' +
-                            item.name +
-                            '" /></div><div class="item-slot-amount"><p>' +
-                            item.amount +
-                            '</div><div class="item-slot-name"><p>' +
-                            " " +
-                            ((item.weight * item.amount) / 1000).toFixed(1) +
-                            '</p></div><div class="item-slot-label"><p>' +
-                            item.label +
-                            "</p></div>"
-                        );
-                    $(".player-inventory")
-                        .find("[data-slot=" + item.slot + "]")
-                        .data("item", item);
+        if (data.inventory !== null) {
+            $.each(data.inventory, function(i, item) {
+                if (item != null) {
+                    totalWeight += item.weight * item.amount;
+                    var ItemLabel =
+                        '<div class="item-slot-label"><p>' + item.label + "</p></div>";
+                    // if (item.name.split("_")[0] == "weapon") {
+                        // if (!Inventory.IsWeaponBlocked(item.name)) {
+                            ItemLabel =
+                                '<div class="item-slot-quality"><div class="item-slot-quality-bar"><p>100</p></div></div><div class="item-slot-label"><p>' +
+                                item.label +
+                                "</p></div>";
+                        // }
+                    // }
+                    if (item.slot < 6) {
+                        $(".player-inventory")
+                            .find("[data-slot=" + item.slot + "]")
+                            .addClass("item-drag");
+                        $(".player-inventory")
+                            .find("[data-slot=" + item.slot + "]")
+                            .html(
+                                '<div class="item-slot-key"><p>' +
+                                item.slot +
+                                '</p></div><div class="item-slot-img"><img src="images/' +
+                                item.image +
+                                '" alt="' +
+                                item.name +
+                                '" /></div><div class="item-slot-amount"><p>' +
+                                item.amount +
+                                '</div><div class="item-slot-name"><p>' +
+                                " " +
+                                ((item.weight * item.amount) / 1000).toFixed(1) +
+                                "</p></div>" +
+                                ItemLabel
+                            );
+                        $(".player-inventory")
+                            .find("[data-slot=" + item.slot + "]")
+                            .data("item", item);
+                    } else if (item.slot == 41) {
+                        $(".player-inventory")
+                            .find("[data-slot=" + item.slot + "]")
+                            .addClass("item-drag");
+                        $(".player-inventory")
+                            .find("[data-slot=" + item.slot + "]")
+                            .html(
+                                '<div class="item-slot-key"><p>6 <i class="fas fa-lock"></i></p></div><div class="item-slot-img"><img src="images/' +
+                                item.image +
+                                '" alt="' +
+                                item.name +
+                                '" /></div><div class="item-slot-amount"><p>' +
+                                item.amount +
+                                '</div><div class="item-slot-name"><p>' +
+                                " " +
+                                ((item.weight * item.amount) / 1000).toFixed(1) +
+                                "</p></div>" +
+                                ItemLabel
+                            );
+                        $(".player-inventory")
+                            .find("[data-slot=" + item.slot + "]")
+                            .data("item", item);
+                    } else {
+                        $(".player-inventory")
+                            .find("[data-slot=" + item.slot + "]")
+                            .addClass("item-drag");
+                        $(".player-inventory")
+                            .find("[data-slot=" + item.slot + "]")
+                            .html(
+                                '<div class="item-slot-img"><img src="images/' +
+                                item.image +
+                                '" alt="' +
+                                item.name +
+                                '" /></div><div class="item-slot-amount"><p>' +
+                                item.amount +
+                                '</div><div class="item-slot-name"><p>' +
+                                " " +
+                                ((item.weight * item.amount) / 1000).toFixed(1) +
+                                "</p></div>" +
+                                ItemLabel
+                            );
+                        $(".player-inventory")
+                            .find("[data-slot=" + item.slot + "]")
+                            .data("item", item);
+                    }
+                    Inventory.QualityCheck(item, false, false);
                 }
-            }
-        });
+            });
+        }
 
         var per =(totalWeight/1000)/(data.maxweight/100000)
         $(".pro").css("width",per+"%");
