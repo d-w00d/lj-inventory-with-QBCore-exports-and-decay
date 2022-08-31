@@ -2,9 +2,9 @@
 
 local QBCore = exports['qb-core']:GetCoreObject()
 local Drops = {}
-local Trunks = {}
-local Gloveboxes = {}
-local Stashes = {}
+Trunks = {}
+Gloveboxes = {}
+Stashes = {}
 local ShopItems = {}
 
 --#endregion Variables
@@ -552,7 +552,7 @@ end
 ---Get items in a stash
 ---@param stashId string The id of the stash to get
 ---@return table items
-local function GetStashItems(stashId)
+function GetStashItems(stashId)
 	local items = {}
 	local result = MySQL.scalar.await('SELECT items FROM stashitems WHERE stash = ?', {stashId})
 	if not result then return items end
@@ -574,6 +574,7 @@ local function GetStashItems(stashId)
 				useable = itemInfo["useable"],
 				image = itemInfo["image"],
 				slot = item.slot,
+				created = item.created
 			}
 		end
 	end
@@ -583,7 +584,7 @@ end
 ---Save the items in a stash
 ---@param stashId string The stash id to save the items from
 ---@param items table items to save
-local function SaveStashItems(stashId, items)
+function SaveStashItems(stashId, items)
 	if Stashes[stashId].label == "Stash-None" or not items then return end
 
 	for _, item in pairs(items) do
@@ -808,7 +809,7 @@ end
 ---@param slot number Slot to remove the item from
 ---@param itemName string Name of the item to remove
 ---@param amount? number The amount to remove
-local function RemoveFromTrunk(plate, slot, itemName, amount)
+function RemoveFromTrunk(plate, slot, itemName, amount)
 	amount = tonumber(amount) or 1
 	if Trunks[plate].items[slot] and Trunks[plate].items[slot].name == itemName then
 		if Trunks[plate].items[slot].amount > amount then
@@ -830,7 +831,7 @@ end
 ---Get the items in the glovebox of a vehicle
 ---@param plate string The plate of the vehicle to check
 ---@return table items
-local function GetOwnedVehicleGloveboxItems(plate)
+function GetOwnedVehicleGloveboxItems(plate)
 	local items = {}
 	local result = MySQL.scalar.await('SELECT items FROM gloveboxitems WHERE plate = ?', {plate})
 	if not result then return items end
@@ -862,7 +863,7 @@ end
 ---Save the items in a glovebox
 ---@param plate string The plate to save the items from
 ---@param items table
-local function SaveOwnedGloveboxItems(plate, items)
+function SaveOwnedGloveboxItems(plate, items)
 	if Gloveboxes[plate].label == "Glovebox-None" or not items then return end
 
 	for _, item in pairs(items) do
@@ -884,7 +885,7 @@ end
 ---@param itemName string The name of the item
 ---@param amount? number The amount of the item
 ---@param info? table The info of the item
-local function AddToGlovebox(plate, slot, otherslot, itemName, amount, info, created)
+function AddToGlovebox(plate, slot, otherslot, itemName, amount, info, created)
 	amount = tonumber(amount) or 1
 	local ItemData = QBCore.Shared.Items[itemName]
 
@@ -1439,7 +1440,7 @@ RegisterNetEvent('inventory:server:OpenInventory', function(name, id, other)
 				end
 			end
 			TriggerClientEvent("lj-inventory:client:closeinv", id)
-			TriggerClientEvent("inventory:client:OpenInventory", src, {}, Player.PlayerData.items, secondInv)
+			TriggerClientEvent("inventory:client:OpenInventory", src, {}, Player.PlayerData.items, secondInv, id)
 		else
 			TriggerClientEvent("inventory:client:OpenInventory", src, {}, Player.PlayerData.items)
 		end
@@ -2019,6 +2020,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 			QBCore.Functions.Notify(src, "Item doesn't exist??", "error")
 		end
 	end
+	TriggerClientEvent("inventory:client:UpdatePlayerInventory", Player.PlayerData.source, false)
 end)
 
 RegisterNetEvent('lj-inventory:server:SaveStashItems', function(stashId, items)
