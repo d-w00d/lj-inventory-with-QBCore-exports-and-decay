@@ -87,7 +87,7 @@ QBCore.Functions.CreateCallback('inventory:server:ConvertQuality', function(sour
     end
     if id then
         if Gloveboxes[id] then
-            local GlobeBoxItems = GetOwnedVehicleGloveboxItems(stash)
+            local GlobeBoxItems = GetOwnedVehicleGloveboxItems(id)
             for k, item in pairs(GlobeBoxItems) do
                 if item.created then
                     if QBCore.Shared.Items[item.name:lower()]["decay"] ~= nil or QBCore.Shared.Items[item.name:lower()]["decay"] ~= 0 then
@@ -122,7 +122,7 @@ QBCore.Functions.CreateCallback('inventory:server:ConvertQuality', function(sour
             end
             SaveOwnedGloveboxItems(id, GlobeBoxItems)
         elseif Trunks[id] then
-            local trunkItems = GetOwnedVehicleItems(stash)
+            local trunkItems = GetOwnedVehicleItems(id)
             for k, item in pairs(trunkItems) do
                 if item.created then
                     if QBCore.Shared.Items[item.name:lower()]["decay"] ~= nil or QBCore.Shared.Items[item.name:lower()]["decay"] ~= 0 then
@@ -157,7 +157,7 @@ QBCore.Functions.CreateCallback('inventory:server:ConvertQuality', function(sour
             end
             SaveOwnedVehicleItems(id, trunkItems)
         elseif Stashes[id] then
-            local stashItems = GetStashItems(stash)
+            local stashItems = GetStashItems(id)
             for k, item in pairs(stashItems) do
                 if item.created then
                     if QBCore.Shared.Items[item.name:lower()]["decay"] ~= nil or QBCore.Shared.Items[item.name:lower()]["decay"] ~= 0 then
