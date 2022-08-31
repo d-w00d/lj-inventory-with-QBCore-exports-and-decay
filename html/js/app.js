@@ -2456,7 +2456,7 @@ var requiredItemOpen = false;
             $(".player-inventory").append(
                 '<div class="item-slot" data-slot="' +
                 i +
-                '"><div class="item-slot-key"><p>' +
+                '"><div class="item-slot-key" id="'+i+'"><p>' +
                 i +
                 '</p></div><div class="item-slot-img"></div><div class="item-slot-label"><p>&nbsp;</p></div></div>'
             );
@@ -2754,7 +2754,18 @@ var requiredItemOpen = false;
         if (data.error) {
             Inventory.Error();
         }
-        for (i = 1; i < data.slots + 1; i++) {
+        // First 5 Slots
+        for (i = 1; i < 6; i++) {
+            $(".player-inventory").append(
+                '<div class="item-slot" data-slot="' +
+                i +
+                '"><div class="item-slot-key" id="'+i+'"><p>' +
+                i +
+                '</p></div><div class="item-slot-img"></div><div class="item-slot-label"><p>&nbsp;</p></div></div>'
+            );
+        }
+        // Inventory
+        for (i = 6; i < data.slots + 1; i++) {
             if (i == 41) {
                 $(".player-inventory").append(
                     '<div class="item-slot" data-slot="' +
@@ -2983,7 +2994,7 @@ var requiredItemOpen = false;
             $.when($itembox.fadeOut(300)).done(function() {
                 $itembox.remove();
             });
-        }, 3000);
+        }, 2000);
     };
 
     Inventory.RequiredItem = function(data) {

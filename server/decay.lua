@@ -194,7 +194,7 @@ QBCore.Functions.CreateCallback('inventory:server:ConvertQuality', function(sour
         end
     end
     SetInventory(src, inventory)
-    TriggerClientEvent("inventory:client:UpdatePlayerInventory", Player.PlayerData.source, false)
+    -- TriggerClientEvent("inventory:client:UpdatePlayerInventory", Player.PlayerData.source, false)
     data.inventory = inventory
     data.other = other
     cb(data)

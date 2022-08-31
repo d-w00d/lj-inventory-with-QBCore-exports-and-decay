@@ -2,6 +2,8 @@
 BEWARE THIS IS A CHANGE TO MAKE THE LJ-INVENTORY WORK WITH THE LATEST VERSION OF QBCORE AND THEIR EXPORTS
 I DID NOT CREATE THIS SCRIPT, CREDITS FOR THIS SCRIPT GO TO PROJECT SLOTH, LJ
 
+Change all occurances of qb-inventory to lj-inventory inside qb-core
+
 
 Change giveStarterItems function inside qb-multicharacter and qb-cityhal to this function
 
