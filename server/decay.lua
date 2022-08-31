@@ -1,6 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-local TimeAllowed = 60 * 2 -- Maths for 1 day dont touch its very important and could break everything
+local TimeAllowed = 60 * 60 * 24 * 2 -- Maths for 1 day dont touch its very important and could break everything
 function ConvertQuality(item)
 	local StartDate = item.created
     local DecayRate = QBCore.Shared.Items[item.name:lower()]["decay"] ~= nil and QBCore.Shared.Items[item.name:lower()]["decay"] or 0.0
