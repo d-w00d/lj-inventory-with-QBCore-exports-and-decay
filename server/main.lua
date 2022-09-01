@@ -691,7 +691,7 @@ end
 ---Get the items in the trunk of a vehicle
 ---@param plate string The plate of the vehicle to check
 ---@return table items
-local function GetOwnedVehicleItems(plate)
+function GetOwnedVehicleItems(plate)
 	local items = {}
 	local result = MySQL.scalar.await('SELECT items FROM trunkitems WHERE plate = ?', {plate})
 	if not result then return items end
@@ -723,7 +723,7 @@ end
 ---Save the items in a trunk
 ---@param plate string The plate to save the items from
 ---@param items table
-local function SaveOwnedVehicleItems(plate, items)
+function SaveOwnedVehicleItems(plate, items)
 	if Trunks[plate].label == "Trunk-None" or not items then return end
 
 	for _, item in pairs(items) do
