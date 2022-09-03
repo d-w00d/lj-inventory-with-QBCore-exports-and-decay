@@ -7,7 +7,7 @@ Change all occurances of qb-inventory to lj-inventory inside qb-core
 
 Change giveStarterItems function inside qb-multicharacter and qb-cityhal to this function
 
-```lua 
+```lua
 local function giveStarterItems()
     local Player = QBCore.Functions.GetPlayer(source)
     if not Player then return end
@@ -28,7 +28,8 @@ local function giveStarterItems()
         end
         exports['lj-inventory']:AddItem(src, v.item, 1, nil, info)
     end
-end```
+end
+```
 
 Then change in all your scripts, the following functions and triggers with their corresponding exports
 
@@ -67,7 +68,8 @@ exports['lj-inventory]:ClearInventory(source, filterItems)
 
 Change QBCore.Functions.SetInventory(items, dontUpdateChat)
 to
-exports['lj-inventory]:SetInventory(source, items)```
+exports['lj-inventory]:SetInventory(source, items)
+```
 
 # Inventory Decay
 
@@ -82,7 +84,9 @@ exports['lj-inventory]:SetInventory(source, items)```
 
 you need to add a decay and created value in your qb-core/shared/items for all items, the decay is set to be the days the item lasts
 
+
 ```lua
 ["created"] = nil
 ["decay"] = 28.0 -- for 28 days
 ```
+
