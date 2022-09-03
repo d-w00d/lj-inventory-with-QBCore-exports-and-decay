@@ -39,7 +39,7 @@ to
 exports['lj-inventory']:RemoveItem(source, name of item, amount, slot(optional))
 
 Change the QBCore:Server:AddItem trigger to
-exports['lj-inventory]:AddItem(source, name of item, amount, slot, info)
+exports['lj-inventory']:AddItem(source, name of item, amount, slot, info)
 
 Change
 QBCore.Functions.TriggerCallback('QBCore:HasItem', function(result)
