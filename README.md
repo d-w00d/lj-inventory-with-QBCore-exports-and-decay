@@ -56,19 +56,19 @@ end
 
 Change QBCore.Functions.GetItemByName(item)
 To
-exports['lj-inventory]:GetItemByName(source, item)
+exports['lj-inventory']:GetItemByName(source, item)
 
 Change QBCore.Functions.GetItemsByName(item)
 to
-exports['lj-inventory]:GetItemsByName(source, item)
+exports['lj-inventory']:GetItemsByName(source, item)
 
 Change QBCore.Functions.ClearInventory()
 to
-exports['lj-inventory]:ClearInventory(source, filterItems)
+exports['lj-inventory']:ClearInventory(source, filterItems)
 
 Change QBCore.Functions.SetInventory(items, dontUpdateChat)
 to
-exports['lj-inventory]:SetInventory(source, items)
+exports['lj-inventory']:SetInventory(source, items)
 ```
 
 # Inventory Decay
