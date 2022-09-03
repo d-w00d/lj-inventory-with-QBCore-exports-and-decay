@@ -7,7 +7,8 @@ Change all occurances of qb-inventory to lj-inventory inside qb-core
 
 Change giveStarterItems function inside qb-multicharacter and qb-cityhal to this function
 
-```local function giveStarterItems()
+```lua 
+local function giveStarterItems()
     local Player = QBCore.Functions.GetPlayer(source)
     if not Player then return end
     for _, v in pairs(QBCore.Shared.StarterItems) do
@@ -28,6 +29,45 @@ Change giveStarterItems function inside qb-multicharacter and qb-cityhal to this
         exports['lj-inventory']:AddItem(src, v.item, 1, nil, info)
     end
 end```
+
+Then change in all your scripts, the following functions and triggers with their corresponding exports
+
+```lua
+Change the QBCore:Server:RemoveItem trigger
+to
+exports['lj-inventory']:RemoveItem(source, name of item, amount, slot(optional))
+
+Change the QBCore:Server:AddItem trigger to
+exports['lj-inventory]:AddItem(source, name of item, amount, slot, info)
+
+Change
+QBCore.Functions.TriggerCallback('QBCore:HasItem', function(result)
+        if hasitem then
+              -- Has Item
+        end
+end, "sandwich")
+
+To
+
+if QBCore.Functions.HasItem("sandwich") then
+        -- Has Item
+end
+
+Change QBCore.Functions.GetItemByName(item)
+To
+exports['lj-inventory]:GetItemByName(source, item)
+
+Change QBCore.Functions.GetItemsByName(item)
+to
+exports['lj-inventory]:GetItemsByName(source, item)
+
+Change QBCore.Functions.ClearInventory()
+to
+exports['lj-inventory]:ClearInventory(source, filterItems)
+
+Change QBCore.Functions.SetInventory(items, dontUpdateChat)
+to
+exports['lj-inventory]:SetInventory(source, items)```
 
 # Inventory Decay
 
